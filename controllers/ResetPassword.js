@@ -112,4 +112,4 @@ exports.resetPassword = async (req,res) => {
         message:"someting wents wrong , please try again",
        })
     }
-}
+}  
