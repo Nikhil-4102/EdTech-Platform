@@ -89,7 +89,9 @@ exports.getAllUserDetails = async (req,res) =>{
     } catch (error) {
          return res.status(500).json({
             success:false,
-            message:""
+            message:error.message,
          })
     }
 }
+
+
