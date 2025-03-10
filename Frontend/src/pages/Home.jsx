@@ -205,6 +205,7 @@ const Home = () => {
       {/*Footer */}
       <Footer />
 
+
     </div>
   )
 }
