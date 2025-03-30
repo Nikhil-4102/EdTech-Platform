@@ -90,4 +90,8 @@ const resetPassword = async (req, res) => {
   }
 }
 
+<<<<<<< HEAD:Backend/controllers/ResetPassword.js
 module.exports = { resetPasswordToken, resetPassword }
+=======
+module.exports = { resetPasswordToken, resetPasswordFunc }
+>>>>>>> 3dcdbd6e56e8e7182388d6c9dc049d182584d695:Backend/controllers/resetPassword.js

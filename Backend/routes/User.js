@@ -1,7 +1,7 @@
 // Import the required modules
 const express = require("express")
 const router = express.Router()
-import { resetPasswordFunc ,resetPasswordToken } from "../controllers/resetPassword"
+import { resetPassword ,resetPasswordToken } from "../controllers/resetPassword"
 
 // Import the required controllers and middleware functions
 const {
@@ -40,7 +40,7 @@ router.post("/changepassword", auth, changePassword)
 router.post("/reset-password-token", resetPasswordToken)
 
 // Route for resetting user's password after verification
-router.post("/reset-password", resetPasswordFunc)
+router.post("/reset-password", resetPassword)
 
 // Export the router for use in the main application
 module.exports = router
