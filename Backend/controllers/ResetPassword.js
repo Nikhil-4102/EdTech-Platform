@@ -1,20 +1,20 @@
-import { findOne, findOneAndUpdate } from "../models/User"
-import mailSender from "../utils/mailSender"
-import { hash } from "bcrypt"
-import { randomBytes } from "crypto"
-export async function resetPasswordToken(req, res) {
+const User = require("../models/User")
+const mailSender = require("../utils/mailSender")
+const bcrypt = require("bcrypt")
+const crypto = require("crypto")
+exports.resetPasswordToken = async (req, res) => {
   try {
     const email = req.body.email
-    const user = await findOne({ email: email })
+    const user = await User.findOne({ email: email })
     if (!user) {
       return res.json({
         success: false,
         message: `This Email: ${email} is not Registered With Us Enter a Valid Email `,
       })
     }
-    const token = randomBytes(20).toString("hex")
+    const token = crypto.randomBytes(20).toString("hex")
 
-    const updatedDetails = await findOneAndUpdate(
+    const updatedDetails = await User.findOneAndUpdate(
       { email: email },
       {
         token: token,
@@ -47,7 +47,7 @@ export async function resetPasswordToken(req, res) {
   }
 }
 
-export async function resetPassword(req, res) {
+exports.resetPassword = async (req, res) => {
   try {
     const { password, confirmPassword, token } = req.body
 
@@ -57,7 +57,7 @@ export async function resetPassword(req, res) {
         message: "Password and Confirm Password Does not Match",
       })
     }
-    const userDetails = await findOne({ token: token })
+    const userDetails = await User.findOne({ token: token })
     if (!userDetails) {
       return res.json({
         success: false,
@@ -70,8 +70,8 @@ export async function resetPassword(req, res) {
         message: `Token is Expired, Please Regenerate Your Token`,
       })
     }
-    const encryptedPassword = await hash(password, 10)
-    await findOneAndUpdate(
+    const encryptedPassword = await bcrypt.hash(password, 10)
+    await User.findOneAndUpdate(
       { token: token },
       { password: encryptedPassword },
       { new: true }
