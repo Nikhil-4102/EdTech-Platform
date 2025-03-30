@@ -26,12 +26,12 @@ const resetPasswordToken = async (req, res) => {
     console.log("DETAILS", updatedDetails)
 
     // const url = http://localhost:3000/update-password/${token}
-    const url = https://studynotion-edtech-project.vercel.app/update-password/${token}
+    const url = `https://studynotion-edtech-project.vercel.app/update-password/${token}`
 
     await mailSender(
       email,
       "Password Reset",
-      Your Link for email verification is ${url}. Please click this url to reset your password.
+      `Your Link for email verification is ${url}. Please click this url to reset your password.`
     )
 
     res.json({
@@ -43,7 +43,7 @@ const resetPasswordToken = async (req, res) => {
     return res.json({
       error: error.message,
       success: false,
-      message: Some Error in Sending the Reset Message,
+      message: "Some Error in Sending the Reset Message",
     })
   }
 }
@@ -68,7 +68,7 @@ const resetPasswordFunc = async (req, res) => {
     if (!(userDetails.resetPasswordExpires > Date.now())) {
       return res.status(403).json({
         success: false,
-        message: Token is Expired, Please Regenerate Your Token,
+        message: "Token is Expired, Please Regenerate Your Token",
       })
     }
     const encryptedPassword = await bcrypt.hash(password, 10)
@@ -79,13 +79,13 @@ const resetPasswordFunc = async (req, res) => {
     )
     res.json({
       success: true,
-      message: Password Reset Successful,
+      message: "Password Reset Successful",
     })
   } catch (error) {
     return res.json({
       error: error.message,
       success: false,
-      message: Some Error in Updating the Password,
+      message: "Some Error in Updating the Password",
     })
   }
 }
