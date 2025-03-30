@@ -48,7 +48,7 @@ const resetPasswordToken = async (req, res) => {
   }
 }
 
-const resetPasswordFunc = async (req, res) => {
+const resetPassword = async (req, res) => {
   try {
     const { password, confirmPassword, token } = req.body
 
@@ -90,4 +90,4 @@ const resetPasswordFunc = async (req, res) => {
   }
 }
 
-module.exports = { resetPasswordToken, resetPasswordFunc }
+module.exports = { resetPasswordToken, resetPassword }
