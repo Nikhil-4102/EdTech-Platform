@@ -2,7 +2,6 @@ const Course = require("../models/Course")
 const Category = require("../models/Category")
 const Section = require("../models/Section")
 
-const SubSection = require("../models/Subsection.js")
 
 const User = require("../models/User")
 const { uploadImageToCloudinary } = require("../utils/imageUploader")
@@ -264,6 +263,18 @@ exports.getAllCourses = async (req, res) => {
 //         message: `Could not find course with id: ${courseId}`,
 //       })
 //     }
+
+
+//this code from models/Subsection.js there is error while deploying thats why im hardcoded it here not calling this file
+const mongoose = require("mongoose");
+const SubSectionSchema = new mongoose.Schema({
+  title: { type: String },
+  timeDuration: { type: String },
+  description: { type: String },
+  videoUrl: { type: String },
+});
+
+module.exports = mongoose.model("SubSection", SubSectionSchema);
 
 //     if (courseDetails.status === "Draft") {
 //       return res.status(403).json({
