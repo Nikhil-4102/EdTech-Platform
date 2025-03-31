@@ -3,6 +3,8 @@ const mailSender = require("../utils/mailSender")
 const bcrypt = require("bcrypt")
 const crypto = require("crypto")
 
+// these two functions resetPasswordToken and resetPassword are hardcode in routes/User folder bcoz there is error while deploying 
+
 const resetPasswordToken = async (req, res) => {
   try {
     const email = req.body.email
